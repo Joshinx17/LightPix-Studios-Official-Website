@@ -1,0 +1,1 @@
+# LightPix-show-rating
