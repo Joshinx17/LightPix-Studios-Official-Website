@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Series/Shows Rating Website</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header>
+        <h1>LightPix Studios Rating Website</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#show1">Stranger Things</a></li>
+            <li><a href="#show2">Show 2</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="show1" class="show">
+            <h2>Stranger Things</h2>
+            <div class="rating">
+                <span>Rate the Show:</span>
+                <div class="stars" data-show-id="1">
+                    ★★★★★
+                </div>
+                <div class="review">
+                    <textarea placeholder="Write your review here..."></textarea>
+                    <button>Submit Review</button>
+                </div>
+            </div>
+            <div class="seasons">
+                <h3>Seasons</h3>
+                <div class="season" data-season-id="1">
+                    <h4>Season 1</h4>
+                    <div class="rating">
+                        <span>Rate the Season:</span>
+                        <div class="stars" data-season-id="1-1">
+                            ★★★★★
+                        </div>
+                        <div class="review">
+                            <textarea placeholder="Write your review here..."></textarea>
+                            <button>Submit Review</button>
+                        </div>
+                    </div>
+                    <div class="episodes">
+                        <h5>Episodes</h5>
+                        <div class="episode" data-episode-id="1-1-1">
+                            <h6>Episode 1</h6>
+                            <div class="rating">
+                                <span>Rate the Episode:</span>
+                                <div class="stars" data-episode-id="1-1-1">
+                                    ★★★★★
+                                </div>
+                                <div class="review">
+                                    <textarea placeholder="Write your review here..."></textarea>
+                                    <button>Submit Review</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Add more episodes as needed -->
+                    </div>
+                </div>
+                <!-- Add more seasons as needed -->
+            </div>
+        </section>
+        <section id="show2" class="show">
+            <h2>Show 2</h2>
+            <!-- Repeat structure for Show 2 -->
+        </section>
+    </main>
+    <script src="./script.js"></script>
+</body>
+</html>
