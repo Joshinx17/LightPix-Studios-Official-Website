@@ -3,72 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Series/Shows Rating Website</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>Lightpix Studio | Creative Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>LightPix Studios Rating Website</h1>
-    </header>
+
     <nav>
-        <ul>
-            <li><a href="#show1">Stranger Things</a></li>
-            <li><a href="#show2">Show 2</a></li>
-        </ul>
-    </nav>
-    <main>
-        <section id="show1" class="show">
-            <h2>Stranger Things</h2>
-            <div class="rating">
-                <span>Rate the Show:</span>
-                <div class="stars" data-show-id="1">
-                    ★★★★★
-                </div>
-                <div class="review">
-                    <textarea placeholder="Write your review here..."></textarea>
-                    <button>Submit Review</button>
-                </div>
+        <div class="nav-container">
+            <div class="logo">LIGHTPIX<span>STUDIO</span></div>
+            <div class="nav-links">
+                <button class="nav-btn active" data-tab="stories">Library</button>
+                <button class="nav-btn" data-tab="art">Atelier</button>
+                <button class="nav-btn" data-tab="photography">Gallery</button>
             </div>
-            <div class="seasons">
-                <h3>Seasons</h3>
-                <div class="season" data-season-id="1">
-                    <h4>Season 1</h4>
-                    <div class="rating">
-                        <span>Rate the Season:</span>
-                        <div class="stars" data-season-id="1-1">
-                            ★★★★★
-                        </div>
-                        <div class="review">
-                            <textarea placeholder="Write your review here..."></textarea>
-                            <button>Submit Review</button>
-                        </div>
+        </div>
+    </nav>
+
+    <header class="studio-intro">
+        <h1>Curated Narratives.</h1>
+        <p>A minimalist space for the wandering mind.</p>
+    </header>
+
+    <main>
+        <section id="stories" class="tab-content active">
+            <div class="grid-controls">
+                <h2>The Library</h2>
+            </div>
+            
+            <div class="wattpad-grid">
+                <div class="book-item" onclick="openBook('./Books/Cant Hurt Me- David Goggins.pdf')">
+                    <div class="book-cover-wrapper">
+                        <img src="Coverpage/coverpage00.png" alt="Cover 1">
+                        <div class="read-overlay"><span>Read PDF</span></div>
                     </div>
-                    <div class="episodes">
-                        <h5>Episodes</h5>
-                        <div class="episode" data-episode-id="1-1-1">
-                            <h6>Episode 1</h6>
-                            <div class="rating">
-                                <span>Rate the Episode:</span>
-                                <div class="stars" data-episode-id="1-1-1">
-                                    ★★★★★
-                                </div>
-                                <div class="review">
-                                    <textarea placeholder="Write your review here..."></textarea>
-                                    <button>Submit Review</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Add more episodes as needed -->
+                    <div class="book-meta">
+                        <h3>The Neon Silence</h3>
+                        <p>Sci-Fi Noir</p>
                     </div>
                 </div>
-                <!-- Add more seasons as needed -->
+
+                <div class="book-item" onclick="openBook('./Books/IKIGAI - The Japanese secret to a long and happy life.pdf')">
+                    <div class="book-cover-wrapper">
+                        <img src="Coverpage/coverpage01.png" alt="Cover 2">
+                        <div class="read-overlay"><span>Read PDF</span></div>
+                    </div>
+                    <div class="book-meta">
+                        <h3>Letters to Vienna</h3>
+                        <p>Historical Fiction</p>
+                    </div>
+                </div>
+
+                <div class="book-item" onclick="openBook('./Books/Steve Jobs- Walter Isaacson.pdf')">
+                    <div class="book-cover-wrapper">
+                        <img src="Coverpage/coverpage02.png" alt="Cover 2">
+                        <div class="read-overlay"><span>Read PDF</span></div>
+                    </div>
+                    <div class="book-meta">
+                        <h3>Letters to Vienna</h3>
+                        <p>Historical Fiction</p>
+                    </div>
+                </div>
             </div>
         </section>
-        <section id="show2" class="show">
-            <h2>Show 2</h2>
-            <!-- Repeat structure for Show 2 -->
+
+        <section id="art" class="tab-content">
+            <div class="grid-controls">
+                <h2>The Atelier</h2>
+            </div>
+            <div class="art-masonry">
+                <div class="art-card" onclick="openLightbox(this)">
+                    <img src="Art/abstract.jpg" alt="My Artwork">
+                </div>
+                <div class="art-card" onclick="openLightbox(this)">
+                    <img src="Art/japanese sea.webp" alt="My Sketch">
+                </div>
+                <div class="art-card" onclick="openLightbox(this)">
+                    <img src="Art/pearl earing.webp" alt="My Illustration">
+                </div>
+            </div>
+        </section>
+
+        <section id="photography" class="tab-content">
+            <div class="grid-controls">
+                <h2>The Gallery</h2>
+            </div>
+            <div class="photo-mosaic">
+                <div class="photo-card" onclick="openLightbox(this)">
+                    <img src="Photography/indian-birds.jpg" alt="Photo">
+                </div>
+                <div class="photo-card" onclick="openLightbox(this)">
+                    <img src="Photography/lakeside.webp" alt="Photo">
+                </div>
+                <div class="photo-card wide" onclick="openLightbox(this)">
+                    <img src="Photography/cameraman.avif" alt="Wide Photo">
+                </div>
+            </div>
         </section>
     </main>
-    <script src="./script.js"></script>
+
+    <div id="lightbox" class="overlay-modal" onclick="closeLightbox()">
+        <span class="close-icon">&times;</span>
+        <img id="lightbox-img" src="" alt="Full View">
+    </div>
+
+    <div id="pdf-reader" class="pdf-viewer">
+        <div class="reader-nav">
+            <div class="reader-logo">Lightpix Reader</div>
+            <button onclick="closeBook()">Close Reader</button>
+        </div>
+        <iframe id="pdf-frame" src=""></iframe>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
