@@ -3,116 +3,319 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lightpix Studio Official</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <meta name="description" content="LightPix Studios — A premium creative studio offering photography, films, editing, and storytelling services.">
+    <title>LightPix Studios | Creative Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <nav>
+    <div class="noise-overlay"></div>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav">
         <div class="nav-container">
-            <div class="logo">LIGHTPIX<span>STUDIO</span></div>
-            <div class="nav-links">
-                <button class="nav-btn active" data-tab="stories">Library</button>
-                <button class="nav-btn" data-tab="art">Atelier</button>
-                <button class="nav-btn" data-tab="photography">Gallery</button>
-            </div>
+            <a href="index.html" class="logo">LIGHT<span>PIX</span>&nbsp;STUDIOS</a>
+            <button class="hamburger" id="hamburger" aria-label="Open menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about"       class="nav-link">About</a></li>
+                <li><a href="#photography" class="nav-link">Photography</a></li>
+                <li><a href="films.html"   class="nav-link">Films</a></li>
+                <li><a href="#editing"     class="nav-link">Editing</a></li>
+                <li><a href="books.html"   class="nav-link">Stories</a></li>
+                <li><a href="#contact"     class="nav-link nav-cta">Contact Us</a></li>
+            </ul>
         </div>
     </nav>
 
-    <header class="studio-intro">
-        <h1>Curated Narratives.</h1>
-        <p>A minimalist space for the wandering mind.</p>
-    </header>
-
-    <main>
-        <section id="stories" class="tab-content active">
-            <div class="grid-controls">
-                <h2>The Library</h2>
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-bg">
+            <div class="hero-gradient"></div>
+            <div class="hero-particles" id="hero-particles"></div>
+        </div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">Welcome to <span class="nowrap">LightPix Studios</span></p>
+            <h1 class="hero-title gradient-text"><span class="nowrap">LightPix Studios</span></h1>
+            <p class="hero-tagline">Where your ideas become visual reality.</p>
+            <div class="hero-ctas">
+                <a href="#about" class="btn btn-primary">Explore Our Work</a>
+                <a href="#contact" class="btn btn-ghost">Get In Touch</a>
             </div>
-            
-            <div class="wattpad-grid">
-                <div class="book-item" onclick="openBook('./Books/Cant Hurt Me- David Goggins.pdf')">
-                    <div class="book-cover-wrapper">
-                        <img src="Coverpage/coverpage00.png" alt="Cover 1">
-                        <div class="read-overlay"><span>Read PDF</span></div>
-                    </div>
-                    <div class="book-meta">
-                        <h3>The Neon Silence</h3>
-                        <p>Sci-Fi Noir</p>
-                    </div>
-                </div>
+        </div>
+        <div class="hero-scroll-hint">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
 
-                <div class="book-item" onclick="openBook('./Books/IKIGAI - The Japanese secret to a long and happy life.pdf')">
-                    <div class="book-cover-wrapper">
-                        <img src="Coverpage/coverpage01.png" alt="Cover 2">
-                        <div class="read-overlay"><span>Read PDF</span></div>
-                    </div>
-                    <div class="book-meta">
-                        <h3>Letters to Vienna</h3>
-                        <p>Historical Fiction</p>
-                    </div>
+    <!-- ABOUT -->
+    <section id="about" class="section-light">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <p class="section-eyebrow">Our Story</p>
+                    <h2 class="section-title">Built on <em>Passion</em></h2>
+                    <p class="about-desc"><span class="nowrap">LightPix Studios</span> is a full-spectrum creative studio where every frame, every scene, and every word is crafted with intention. From documentary photography to cinematic short films, we transform raw moments into timeless art.</p>
+                    <p class="about-desc">We don't just capture — we create narratives that move people.</p>
+                    <a href="#photography" class="btn btn-primary">See Our Portfolio</a>
                 </div>
-
-                <div class="book-item" onclick="openBook('./Books/Steve Jobs- Walter Isaacson.pdf')">
-                    <div class="book-cover-wrapper">
-                        <img src="Coverpage/coverpage02.png" alt="Cover 2">
-                        <div class="read-overlay"><span>Read PDF</span></div>
+                <div class="about-stats">
+                    <div class="stat-card reveal">
+                        <span class="stat-num" data-target="150">0</span><span class="stat-plus">+</span>
+                        <p>Projects Completed</p>
                     </div>
-                    <div class="book-meta">
-                        <h3>Letters to Vienna</h3>
-                        <p>Historical Fiction</p>
+                    <div class="stat-card reveal">
+                        <span class="stat-num" data-target="80">0</span><span class="stat-plus">+</span>
+                        <p>Happy Clients</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="art" class="tab-content">
-            <div class="grid-controls">
-                <h2>The Atelier</h2>
-            </div>
-            <div class="art-masonry">
-                <div class="art-card" onclick="openLightbox(this)">
-                    <img src="Art/abstract.jpg" alt="My Artwork">
-                </div>
-                <div class="art-card" onclick="openLightbox(this)">
-                    <img src="Art/japanese sea.webp" alt="My Sketch">
-                </div>
-                <div class="art-card" onclick="openLightbox(this)">
-                    <img src="Art/pearl earing.webp" alt="My Illustration">
+                    <div class="stat-card reveal">
+                        <span class="stat-num" data-target="12">0</span><span class="stat-plus">+</span>
+                        <p>Awards Won</p>
+                    </div>
+                    <div class="stat-card reveal">
+                        <span class="stat-num" data-target="7">0</span><span class="stat-plus">+</span>
+                        <p>Years of Excellence</p>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="photography" class="tab-content">
-            <div class="grid-controls">
-                <h2>The Gallery</h2>
+    <!-- SERVICES OVERVIEW -->
+    <section id="services">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-eyebrow">What We Do</p>
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-sub">From the first click of the shutter to the final cut — we do it all.</p>
             </div>
-            <div class="photo-mosaic">
-                <div class="photo-card" onclick="openLightbox(this)">
-                    <img src="Photography/indian-birds.jpg" alt="Photo">
+            <div class="services-grid">
+                <div class="service-card reveal" onclick="location.href='#photography'">
+                    <div class="service-icon">📷</div>
+                    <h3>Photography</h3>
+                    <p>Portraits, landscapes, wildlife — we capture moments that matter with artistic precision.</p>
+                    <span class="service-link">View Gallery →</span>
                 </div>
-                <div class="photo-card" onclick="openLightbox(this)">
-                    <img src="Photography/lakeside.webp" alt="Photo">
+                <div class="service-card reveal" onclick="location.href='films.html'">
+                    <div class="service-icon">🎬</div>
+                    <h3>Films &amp; Short Films</h3>
+                    <p>Full-length features and award-winning short films that tell stories worth sharing.</p>
+                    <span class="service-link">View Films →</span>
                 </div>
-                <div class="photo-card wide" onclick="openLightbox(this)">
-                    <img src="Photography/cameraman.avif" alt="Wide Photo">
+                <div class="service-card reveal" onclick="location.href='#editing'">
+                    <div class="service-icon">✂️</div>
+                    <h3>Editing &amp; Post-Production</h3>
+                    <p>Color grading, VFX, sound design — turning raw footage into cinematic magic.</p>
+                    <span class="service-link">Learn More →</span>
+                </div>
+                <div class="service-card reveal" onclick="location.href='books.html'">
+                    <div class="service-icon">📖</div>
+                    <h3>Stories &amp; Books</h3>
+                    <p>Original narratives, curated reads, and written worlds that linger long after the last page.</p>
+                    <span class="service-link">Browse Library →</span>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">🎭</div>
+                    <h3>Creative Direction</h3>
+                    <p>From concept to execution — cohesive visual identities and creative campaigns.</p>
+                    <span class="service-link">Inquire →</span>
+                </div>
+                <div class="service-card reveal" onclick="location.href='#contact'">
+                    <div class="service-icon">🤝</div>
+                    <h3>Collaborations</h3>
+                    <p>We partner with brands, artists, and changemakers to build something extraordinary together.</p>
+                    <span class="service-link">Get In Touch →</span>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <div id="lightbox" class="overlay-modal" onclick="closeLightbox()">
-        <span class="close-icon">&times;</span>
-        <img id="lightbox-img" src="" alt="Full View">
+    <!-- PHOTOGRAPHY -->
+    <section id="photography">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-eyebrow">Visual Art</p>
+                <h2 class="section-title">Photography</h2>
+                <p class="section-sub">Every shot tells a story. Every shadow holds meaning.</p>
+            </div>
+            <div class="photo-categories">
+                <button class="photo-filter active" data-filter="all">All</button>
+                <button class="photo-filter" data-filter="nature">Nature</button>
+                <button class="photo-filter" data-filter="portrait">Portrait</button>
+                <button class="photo-filter" data-filter="urban">Urban</button>
+            </div>
+            <div class="photo-masonry" id="photo-grid">
+                <div class="photo-item" data-category="nature" onclick="openLightbox(this)">
+                    <img src="Photography/indian-birds.jpg" alt="Wings of India — Wildlife Photography">
+                    <div class="photo-caption"><h4>Wings of India</h4><p>Wildlife · Nature</p></div>
+                </div>
+                <div class="photo-item tall" data-category="nature" onclick="openLightbox(this)">
+                    <img src="Photography/lakeside.webp" alt="Still Waters — Lakeside Photography">
+                    <div class="photo-caption"><h4>Still Waters</h4><p>Landscape · Nature</p></div>
+                </div>
+                <div class="photo-item" data-category="urban" onclick="openLightbox(this)">
+                    <img src="Photography/cameraman.avif" alt="Behind the Lens — Documentary">
+                    <div class="photo-caption"><h4>Behind the Lens</h4><p>Urban · Documentary</p></div>
+                </div>
+                <div class="photo-item" data-category="portrait" onclick="openLightbox(this)">
+                    <img src="Art/pearl earing.webp" alt="Pearl Light — Fine Art Portrait">
+                    <div class="photo-caption"><h4>Pearl Light</h4><p>Portrait · Fine Art</p></div>
+                </div>
+                <div class="photo-item" data-category="portrait" onclick="openLightbox(this)">
+                    <img src="Art/abstract.jpg" alt="Abstract Visions — Fine Art">
+                    <div class="photo-caption"><h4>Abstract Visions</h4><p>Abstract · Fine Art</p></div>
+                </div>
+                <div class="photo-item tall" data-category="nature" onclick="openLightbox(this)">
+                    <img src="Art/japanese sea.webp" alt="Japanese Horizon — Digital Art">
+                    <div class="photo-caption"><h4>Japanese Horizon</h4><p>Digital Art · Nature</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDITING -->
+    <section id="editing">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-eyebrow">Post Production</p>
+                <h2 class="section-title">Editing &amp; Post-Production</h2>
+                <p class="section-sub">Where raw footage transforms into cinematic magic.</p>
+            </div>
+            <div class="editing-showcase">
+                <div class="editing-features">
+                    <div class="edit-feature reveal"><div class="edit-icon">⚙️</div><div><h3>Color Grading</h3><p>Hollywood-grade color science that sets the mood of every frame.</p></div></div>
+                    <div class="edit-feature reveal"><div class="edit-icon">🎥</div><div><h3>Video Editing</h3><p>Precision cuts and rhythmic pacing that keeps audiences engaged.</p></div></div>
+                    <div class="edit-feature reveal"><div class="edit-icon">🎵</div><div><h3>Sound Design</h3><p>Immersive audio from dialogue cleanup to full Dolby-ready mixes.</p></div></div>
+                    <div class="edit-feature reveal"><div class="edit-icon">✨</div><div><h3>VFX &amp; Motion</h3><p>Visual effects and kinetic typography that elevate any production.</p></div></div>
+                    <div class="edit-feature reveal"><div class="edit-icon">📷</div><div><h3>Photo Retouching</h3><p>Compositing and digital art that enhances without losing authenticity.</p></div></div>
+                    <div class="edit-feature reveal"><div class="edit-icon">💻</div><div><h3>DCP &amp; Delivery</h3><p>Festival-ready Digital Cinema Packages and broadcast-standard files.</p></div></div>
+                </div>
+                <div class="editing-tools">
+                    <h3>Tools We Master</h3>
+                    <div class="tools-list">
+                        <div class="tool-pill">Premiere Pro</div>
+                        <div class="tool-pill">DaVinci Resolve</div>
+                        <div class="tool-pill">After Effects</div>
+                        <div class="tool-pill">Photoshop</div>
+                        <div class="tool-pill">Lightroom</div>
+                        <div class="tool-pill">Final Cut Pro</div>
+                        <div class="tool-pill">Audition</div>
+                        <div class="tool-pill">Nuke</div>
+                    </div>
+                    <div class="editing-process">
+                        <h3>Our Process</h3>
+                        <div class="process-step"><span class="step-dot"></span><div><strong>Brief &amp; Vision</strong><p>Understanding your story and goals</p></div></div>
+                        <div class="process-step"><span class="step-dot"></span><div><strong>Rough Cut</strong><p>Building the narrative skeleton</p></div></div>
+                        <div class="process-step"><span class="step-dot"></span><div><strong>Color &amp; Audio</strong><p>Enhancing mood and immersion</p></div></div>
+                        <div class="process-step"><span class="step-dot"></span><div><strong>Final Delivery</strong><p>Polished, export-ready masters</p></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-eyebrow">Let's Create Together</p>
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-sub">Have a project in mind? We'd love to hear from you.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <div class="contact-item"><span class="contact-icon">📍</span><div><h4>Location</h4><p>Mumbai, Maharashtra, India</p></div></div>
+                    <div class="contact-item"><span class="contact-icon">📧</span><div><h4>Email</h4><p>hello@lightpixstudios.com</p></div></div>
+                    <div class="contact-item"><span class="contact-icon">📞</span><div><h4>Phone</h4><p>+91 98765 43210</p></div></div>
+                    <div class="social-links">
+                        <a href="#" class="social-btn" aria-label="Instagram">📸</a>
+                        <a href="#" class="social-btn" aria-label="YouTube">🎥</a>
+                        <a href="#" class="social-btn" aria-label="Twitter">💬</a>
+                        <a href="#" class="social-btn" aria-label="LinkedIn">👥</a>
+                    </div>
+                </div>
+                <form class="contact-form" id="contact-form" novalidate>
+                    <div class="form-group"><input type="text" id="cf-name" name="name" placeholder="Your Name" required><label for="cf-name">Your Name</label></div>
+                    <div class="form-group"><input type="email" id="cf-email" name="email" placeholder="Your Email" required><label for="cf-email">Your Email</label></div>
+                    <div class="form-group">
+                        <select id="cf-service" name="service">
+                            <option value="">Select a Service</option>
+                            <option value="photography">Photography</option>
+                            <option value="films">Films &amp; Movies</option>
+                            <option value="short-films">Short Films</option>
+                            <option value="editing">Editing</option>
+                            <option value="stories">Stories &amp; Books</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <label for="cf-service">Service</label>
+                    </div>
+                    <div class="form-group"><textarea id="cf-message" name="message" placeholder="Tell us about your project..." rows="5" required></textarea><label for="cf-message">Message</label></div>
+                    <button type="submit" class="btn btn-primary btn-full" id="submit-btn"><span>Send Message</span><span class="btn-arrow"> →</span></button>
+                    <div class="form-success" id="form-success">✓ Message sent! We'll be in touch soon.</div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">LIGHT<span>PIX</span>&nbsp;STUDIOS</a>
+                    <p>Crafting visual stories since 2017. Where light meets imagination.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h5>Services</h5>
+                        <a href="#photography">Photography</a>
+                        <a href="films.html">Films</a>
+                        <a href="films.html#short-films">Short Films</a>
+                        <a href="#editing">Editing</a>
+                        <a href="books.html">Stories</a>
+                    </div>
+                    <div class="footer-col">
+                        <h5>Company</h5>
+                        <a href="#about">About Us</a>
+                        <a href="#contact">Contact</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Press</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 <span class="nowrap">LightPix Studios</span>. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" class="lightbox-modal" role="dialog" aria-modal="true">
+        <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+        <button class="lightbox-prev" id="lb-prev" aria-label="Previous">&#8249;</button>
+        <div class="lightbox-inner">
+            <img id="lightbox-img" src="" alt="Full size view">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+        <button class="lightbox-next" id="lb-next" aria-label="Next">&#8250;</button>
     </div>
 
+    <!-- PDF READER -->
     <div id="pdf-reader" class="pdf-viewer">
         <div class="reader-nav">
-            <div class="reader-logo">Lightpix Reader</div>
-            <button onclick="closeBook()">Close Reader</button>
+            <a href="index.html" class="logo">LIGHT<span>PIX</span>&nbsp;READER</a>
+            <button onclick="closeBook()" class="btn btn-ghost btn-sm">✕ Close Reader</button>
         </div>
-        <iframe id="pdf-frame" src=""></iframe>
+        <iframe id="pdf-frame" src="" title="PDF Reader"></iframe>
     </div>
 
     <script src="script.js"></script>

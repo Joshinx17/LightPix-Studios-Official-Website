@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LightPix Studios — Stories & Books. Curated reads and original narratives from our creative library.">
+    <title>Stories &amp; Books | LightPix Studios</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Books-page specific styles */
+        .books-hero {
+            padding: 10rem 0 5rem;
+            background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-0) 100%);
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .books-hero::before {
+            content: '📖';
+            position: absolute;
+            font-size: 18rem;
+            opacity: 0.025;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        .books-filter-bar {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        .book-filter {
+            padding: 0.45rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            color: var(--text-2);
+            background: var(--bg-2);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+        .book-filter:hover,
+        .book-filter.active {
+            background: var(--gold);
+            color: var(--bg-0);
+            border-color: var(--gold);
+            font-weight: 600;
+        }
+        .books-full-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem 2rem;
+        }
+        .featured-quote {
+            background: var(--bg-2);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--gold);
+            border-radius: var(--radius-md);
+            padding: 2.5rem;
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+        .featured-quote blockquote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            color: var(--text-1);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        .featured-quote cite {
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+        @media (max-width: 1024px) {
+            .books-full-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .books-full-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .books-full-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="noise-overlay"></div>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">LIGHT<span>PIX</span>&nbsp;STUDIOS</a>
+            <button class="hamburger" id="hamburger" aria-label="Open menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html#about"       class="nav-link">About</a></li>
+                <li><a href="index.html#photography" class="nav-link">Photography</a></li>
+                <li><a href="films.html"             class="nav-link">Films</a></li>
+                <li><a href="index.html#editing"     class="nav-link">Editing</a></li>
+                <li><a href="books.html"             class="nav-link active-link">Stories</a></li>
+                <li><a href="index.html#contact"     class="nav-link nav-cta">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- BOOKS HERO -->
+    <div class="books-hero">
+        <div class="container">
+            <a href="index.html" class="back-link">← Back to Home</a>
+            <p class="section-eyebrow"><span class="nowrap">LightPix Studios</span></p>
+            <h1 class="section-title gradient-text">Stories &amp; Books</h1>
+            <p class="section-sub">Narratives that live on the page and echo in the mind.</p>
+        </div>
+    </div>
+
+    <!-- FEATURED QUOTE -->
+    <section class="section-light" style="padding: 5rem 0;">
+        <div class="container">
+            <div class="featured-quote reveal">
+                <blockquote>
+                    "A reader lives a thousand lives before he dies. The man who never reads lives only one."
+                </blockquote>
+                <cite>— George R.R. Martin</cite>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOOKS LIBRARY -->
+    <section id="library" style="background: var(--bg-0); padding: 2rem 0 6rem;">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-eyebrow">Our Collection</p>
+                <h2 class="section-title">The Library</h2>
+                <p class="section-sub">Click any book to open it in our built-in reader.</p>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="books-filter-bar">
+                <button class="book-filter active" data-genre="all">All</button>
+                <button class="book-filter" data-genre="non-fiction">Non-Fiction</button>
+                <button class="book-filter" data-genre="self-help">Self-Help</button>
+                <button class="book-filter" data-genre="biography">Biography</button>
+                <button class="book-filter" data-genre="fiction">Fiction</button>
+            </div>
+
+            <!-- Books Grid -->
+            <div class="books-full-grid">
+
+                <!-- Existing books with real PDFs -->
+                <div class="book-card reveal" data-genre="non-fiction" onclick="openBook('./Books/Cant Hurt Me- David Goggins.pdf')">
+                    <div class="book-cover">
+                        <img src="Coverpage/coverpage00.png" alt="Can't Hurt Me by David Goggins">
+                        <div class="book-read-overlay">
+                            <span class="read-icon">📖</span>
+                            <span>Read Now</span>
+                        </div>
+                    </div>
+                    <div class="book-info">
+                        <span class="book-genre">Non-Fiction</span>
+                        <h3>Can't Hurt Me</h3>
+                        <p class="book-author">David Goggins</p>
+                    </div>
+                </div>
+
+                <div class="book-card reveal" data-genre="self-help" onclick="openBook('./Books/IKIGAI - The Japanese secret to a long and happy life.pdf')">
+                    <div class="book-cover">
+                        <img src="Coverpage/coverpage01.png" alt="Ikigai — The Japanese Secret">
+                        <div class="book-read-overlay">
+                            <span class="read-icon">📖</span>
+                            <span>Read Now</span>
+                        </div>
+                    </div>
+                    <div class="book-info">
+                        <span class="book-genre">Self-Help</span>
+                        <h3>Ikigai</h3>
+                        <p class="book-author">Héctor García &amp; Francesc Miralles</p>
+                    </div>
+                </div>
+
+                <div class="book-card reveal" data-genre="biography" onclick="openBook('./Books/Steve Jobs- Walter Isaacson.pdf')">
+                    <div class="book-cover">
+                        <img src="Coverpage/coverpage02.png" alt="Steve Jobs by Walter Isaacson">
+                        <div class="book-read-overlay">
+                            <span class="read-icon">📖</span>
+                            <span>Read Now</span>
+                        </div>
+                    </div>
+                    <div class="book-info">
+                        <span class="book-genre">Biography</span>
+                        <h3>Steve Jobs</h3>
+                        <p class="book-author">Walter Isaacson</p>
+                    </div>
+                </div>
+
+                <!-- Placeholder cards (no PDF yet) -->
+                <div class="book-card reveal" data-genre="fiction" style="opacity:0.55; cursor:default;">
+                    <div class="book-cover" style="background: linear-gradient(145deg, var(--bg-2), var(--bg-3)); display:flex; align-items:center; justify-content:center;">
+                        <span style="font-size:3rem; opacity:0.3;">📚</span>
+                        <div class="book-read-overlay" style="display:none;"></div>
+                    </div>
+                    <div class="book-info">
+                        <span class="book-genre">Fiction</span>
+                        <h3>The Neon Silence</h3>
+                        <p class="book-author">LightPix Original · Coming Soon</p>
+                    </div>
+                </div>
+
+                <div class="book-card reveal" data-genre="fiction" style="opacity:0.55; cursor:default;">
+                    <div class="book-cover" style="background: linear-gradient(145deg, var(--bg-2), var(--bg-3)); display:flex; align-items:center; justify-content:center;">
+                        <span style="font-size:3rem; opacity:0.3;">📚</span>
+                        <div class="book-read-overlay" style="display:none;"></div>
+                    </div>
+                    <div class="book-info">
+                        <span class="book-genre">Historical Fiction</span>
+                        <h3>Letters to Vienna</h3>
+                        <p class="book-author">LightPix Original · Coming Soon</p>
+                    </div>
+                </div>
+
+                <div class="book-card reveal" data-genre="self-help" style="opacity:0.55; cursor:default;">
+                    <div class="book-cover" style="background: linear-gradient(145deg, var(--bg-2), var(--bg-3)); display:flex; align-items:center; justify-content:center;">
+                        <span style="font-size:3rem; opacity:0.3;">📚</span>
+                        <div class="book-read-overlay" style="display:none;"></div>
+                    </div>
+                    <div class="book-info">
+                        <span class="book-genre">Self-Help</span>
+                        <h3>The Focused Mind</h3>
+                        <p class="book-author">LightPix Original · Coming Soon</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="section-light" style="padding: 5rem 0;">
+        <div class="container" style="text-align:center;">
+            <p class="section-eyebrow">Have a Story to Tell?</p>
+            <h2 class="section-title" style="margin-bottom:1rem;">We Can Help You <em>Write It</em></h2>
+            <p class="section-sub" style="margin-bottom:2.5rem;">From concept to finished manuscript — <span class="nowrap">LightPix Studios</span> offers creative writing and publishing support.</p>
+            <a href="index.html#contact" class="btn btn-primary">Start Your Story →</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">LIGHT<span>PIX</span>&nbsp;STUDIOS</a>
+                    <p>Crafting visual stories since 2017. Where light meets imagination.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h5>Services</h5>
+                        <a href="index.html#photography">Photography</a>
+                        <a href="films.html">Films</a>
+                        <a href="films.html#short-films">Short Films</a>
+                        <a href="index.html#editing">Editing</a>
+                        <a href="books.html">Stories</a>
+                    </div>
+                    <div class="footer-col">
+                        <h5>Company</h5>
+                        <a href="index.html#about">About Us</a>
+                        <a href="index.html#contact">Contact</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Press</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 <span class="nowrap">LightPix Studios</span>. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- PDF READER -->
+    <div id="pdf-reader" class="pdf-viewer">
+        <div class="reader-nav">
+            <a href="books.html" class="logo">LIGHT<span>PIX</span>&nbsp;READER</a>
+            <button onclick="closeBook()" class="btn btn-ghost btn-sm">✕ Close Reader</button>
+        </div>
+        <iframe id="pdf-frame" src="" title="PDF Reader"></iframe>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Genre filter for books page
+        document.querySelectorAll('.book-filter').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.book-filter').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const genre = btn.dataset.genre;
+                document.querySelectorAll('.books-full-grid .book-card').forEach(card => {
+                    const match = genre === 'all' || card.dataset.genre === genre;
+                    card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                    if (match) {
+                        card.style.display = 'flex';
+                        requestAnimationFrame(() => { card.style.opacity = ''; card.style.transform = ''; });
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.95)';
+                        setTimeout(() => { card.style.display = 'none'; }, 300);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
