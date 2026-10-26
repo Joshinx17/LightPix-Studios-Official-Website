@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     window.addEventListener('resize', () => setMenuOpen(false));
     document.addEventListener('keydown', event => {
-        if (event.key === 'Escape') {
+        if (event.key === 'Escape' && menu.classList.contains('open')) {
             setMenuOpen(false);
             menuButton.focus();
         }
@@ -113,6 +113,56 @@ document.addEventListener('DOMContentLoaded', () => {
                 serviceName + '\n\n' + message;
             window.location.href = 'mailto:' + inquiryEmail + '?subject=' +
                 encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        });
+    }
+
+    const reader = document.getElementById('pdf-reader');
+    if (reader) {
+        const frame = document.getElementById('pdf-frame');
+        const title = document.getElementById('reader-title');
+        const openLink = document.getElementById('reader-open');
+        const closeButton = document.getElementById('reader-close');
+        let previousFocus = null;
+
+        function closeReader() {
+            reader.classList.remove('active');
+            document.body.classList.remove('modal-open');
+            frame.src = 'about:blank';
+            openLink.removeAttribute('href');
+            previousFocus?.focus();
+        }
+
+        document.querySelectorAll('.book-card[data-pdf]').forEach(book => {
+            book.addEventListener('click', () => {
+                const pdfUrl = new URL(book.dataset.pdf, document.baseURI).href;
+                previousFocus = document.activeElement;
+                title.textContent = book.dataset.title;
+                frame.title = book.dataset.title + ' in LightPix Reader';
+                frame.src = pdfUrl;
+                openLink.href = pdfUrl;
+                reader.classList.add('active');
+                document.body.classList.add('modal-open');
+                closeButton.focus();
+            });
+        });
+        closeButton.addEventListener('click', closeReader);
+        reader.addEventListener('keydown', event => {
+            if (event.key === 'Escape') {
+                event.preventDefault();
+                closeReader();
+            }
+            if (event.key === 'Tab') {
+                const controls = [openLink, closeButton, frame];
+                const first = controls[0];
+                const last = controls[controls.length - 1];
+                if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault();
+                    last.focus();
+                } else if (!event.shiftKey && document.activeElement === last) {
+                    event.preventDefault();
+                    first.focus();
+                }
+            }
         });
     }
 });

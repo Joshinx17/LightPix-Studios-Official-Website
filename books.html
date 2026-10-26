@@ -32,6 +32,7 @@
             <p class="section-eyebrow">LightPix Studios</p>
             <h1 class="section-title gradient-text">Stories &amp; Comics</h1>
             <p class="section-sub">Worlds built for the page, the panel, and beyond.</p>
+            <a href="#reader-demo" class="btn btn-primary page-header-cta">Try LightPix Reader</a>
         </div></header>
         <section id="stories"><div class="container">
             <div class="section-header"><p class="section-eyebrow">Commissioned work</p><h2 class="section-title">Words and worlds for your project</h2><p class="section-sub">Begin with a premise, an existing draft, or a character you want to bring to life.</p></div>
@@ -45,9 +46,31 @@
             <div class="reveal"><p class="section-eyebrow">Across formats</p><h2 class="section-title">A story can grow beyond the page</h2><p class="feature-copy">A written world may call for illustration, music, a short film, or a visual campaign. LightPix can develop those elements together while keeping the story recognisable.</p><a href="index.html#services" class="btn btn-primary">Explore All Services</a></div>
             <div class="approach-panel reveal"><h3>Possible starting points</h3><ul class="check-list"><li>A premise that needs structure and characters</li><li>A comic that needs writing and art</li><li>A draft ready for an editorial pass</li><li>A story to adapt for screen or sound</li></ul></div>
         </div></section>
+        <section id="reader-demo" class="reader-section"><div class="container">
+            <div class="section-header">
+                <p class="section-eyebrow">Free reading demo</p>
+                <h2 class="section-title">The LightPix Reader</h2>
+                <p class="section-sub">Open any book below and read it here, without an account or payment.</p>
+            </div>
+            <p class="demo-notice">These are sample books by other authors, included to demonstrate the Reader. They are not LightPix Studios originals and will be replaced with our own books in the future.</p>
+            <div class="books-grid demo-books-grid">
+                <button class="book-card reveal" type="button" data-pdf="Books/Cant Hurt Me- David Goggins.pdf" data-title="Can't Hurt Me" aria-label="Read Can't Hurt Me in LightPix Reader">
+                    <span class="book-cover demo-cover demo-cover-one"><span class="demo-cover-kicker">Reader demo</span><strong>Can't Hurt Me</strong><span>David Goggins</span><span class="demo-cover-action">Read for free →</span></span>
+                    <span class="book-info"><span class="book-genre">Memoir · Demo</span><strong>Can't Hurt Me</strong><span class="book-author">David Goggins</span></span>
+                </button>
+                <button class="book-card reveal" type="button" data-pdf="Books/IKIGAI - The Japanese secret to a long and happy life.pdf" data-title="Ikigai" aria-label="Read Ikigai in LightPix Reader">
+                    <span class="book-cover demo-cover demo-cover-two"><span class="demo-cover-kicker">Reader demo</span><strong>Ikigai</strong><span>Héctor García &amp; Francesc Miralles</span><span class="demo-cover-action">Read for free →</span></span>
+                    <span class="book-info"><span class="book-genre">Non-fiction · Demo</span><strong>Ikigai</strong><span class="book-author">Héctor García &amp; Francesc Miralles</span></span>
+                </button>
+                <button class="book-card reveal" type="button" data-pdf="Books/Steve Jobs- Walter Isaacson.pdf" data-title="Steve Jobs" aria-label="Read Steve Jobs in LightPix Reader">
+                    <span class="book-cover demo-cover demo-cover-three"><span class="demo-cover-kicker">Reader demo</span><strong>Steve Jobs</strong><span>Walter Isaacson</span><span class="demo-cover-action">Read for free →</span></span>
+                    <span class="book-info"><span class="book-genre">Biography · Demo</span><strong>Steve Jobs</strong><span class="book-author">Walter Isaacson</span></span>
+                </button>
+            </div>
+        </div></section>
         <section id="original-stories"><div class="container original-grid">
             <div class="reveal"><p class="section-eyebrow">From our studio</p><h2 class="section-title">Original stories in development</h2><p class="feature-copy">LightPix Studios develops its own novels, stories, and comics. Verified titles, covers, excerpts, and release details will appear here when they are ready to share.</p></div>
-            <div class="feature-panel reveal"><span aria-hidden="true">✦</span><h3>More to come</h3><p>No third-party books or sample titles are presented as studio originals.</p></div>
+            <div class="feature-panel reveal"><span aria-hidden="true">✦</span><h3>More to come</h3><p>Original LightPix titles will have their own place here and in the Reader when they are ready.</p></div>
         </div></section>
         <section class="section-light"><div class="container center-cta"><p class="section-eyebrow">Build a world together</p><h2 class="section-title">Have a story in mind?</h2><p class="section-sub">Tell us where it begins. The right format and creative team can follow.</p><a href="index.html#contact" class="btn btn-primary">Plan a Project</a></div></section>
     </main>
@@ -55,6 +78,14 @@
         <div class="footer-top"><div class="footer-brand"><a href="index.html" class="logo">LIGHT<span>PIX</span>&nbsp;STUDIOS</a><p>Stories made across image, page, and sound.</p></div><div class="footer-links"><div class="footer-col"><h5>Explore</h5><a href="index.html#services">Services</a><a href="films.html">Film &amp; Video</a><a href="books.html">Stories &amp; Comics</a><a href="index.html#art-music">Art &amp; Music</a></div><div class="footer-col"><h5>Studio</h5><a href="index.html#about">About</a><a href="index.html#process">Process</a><a href="index.html#originals">Originals</a><a href="index.html#contact">Plan a Project</a></div></div></div>
         <div class="footer-bottom"><p>&copy; <span class="copyright-year">2026</span> LightPix Studios. All rights reserved.</p></div>
     </div></footer>
+    <div id="pdf-reader" class="pdf-viewer" role="dialog" aria-modal="true" aria-labelledby="reader-title" aria-describedby="reader-help">
+        <div class="reader-nav">
+            <div class="reader-heading"><span class="reader-brand">LIGHT<span>PIX</span> READER</span><strong id="reader-title">Book title</strong></div>
+            <div class="reader-actions"><a id="reader-open" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">Open PDF in new tab</a><button id="reader-close" type="button" class="btn btn-ghost btn-sm" aria-label="Close LightPix Reader">✕ Close Reader</button></div>
+        </div>
+        <p id="reader-help" class="reader-help">Use the PDF controls to turn pages or zoom. If the preview does not load, open the PDF in a new tab.</p>
+        <iframe id="pdf-frame" title="Book in LightPix Reader" src="about:blank"></iframe>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
