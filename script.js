@@ -1,300 +1,118 @@
-/* =============================================
-   LIGHTPIX STUDIOS — MAIN JAVASCRIPT
-   ============================================= */
-
+/* LightPix Studios — shared site interactions */
 document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.copyright-year').forEach(el => {
+        el.textContent = new Date().getFullYear();
+    });
 
-    /* ─── NAVBAR SCROLL EFFECT ─────────────────── */
     const nav = document.getElementById('main-nav');
-    const handleScroll = () => {
+    const menuButton = document.getElementById('hamburger');
+    const menu = document.getElementById('nav-links');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function setMenuOpen(open) {
+        menu.classList.toggle('open', open);
+        menuButton.classList.toggle('active', open);
+        menuButton.setAttribute('aria-expanded', String(open));
+        menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        menu.inert = !open && window.innerWidth <= 1024;
+    }
+    setMenuOpen(false);
+    menuButton.addEventListener('click', () => setMenuOpen(!menu.classList.contains('open')));
+    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenuOpen(false)));
+    document.addEventListener('click', event => {
+        if (!nav.contains(event.target)) setMenuOpen(false);
+    });
+    window.addEventListener('resize', () => setMenuOpen(false));
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+            setMenuOpen(false);
+            menuButton.focus();
+        }
+    });
+
+    const sections = [...document.querySelectorAll('main section[id]')];
+    function updateNav() {
         nav.classList.toggle('scrolled', window.scrollY > 60);
-        highlightNavLink();
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    /* ─── MOBILE HAMBURGER ──────────────────────── */
-    const hamburger = document.getElementById('hamburger');
-    const navLinks  = document.getElementById('nav-links');
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('open');
-        hamburger.classList.toggle('active');
-    });
-    // Close menu when a link is clicked
-    navLinks.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('open');
-            hamburger.classList.remove('active');
-        });
-    });
-
-    /* ─── ACTIVE NAV LINK ON SCROLL ─────────────── */
-    const sections = document.querySelectorAll('section[id]');
-    function highlightNavLink() {
-        const scrollY = window.scrollY + 120;
+        if (!sections.length) return;
+        const position = window.scrollY + nav.offsetHeight + 48;
         let current = '';
-        sections.forEach(s => {
-            if (scrollY >= s.offsetTop) current = s.id;
+        sections.forEach(section => {
+            if (position >= section.offsetTop) current = section.id;
         });
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.classList.toggle('active-link', link.getAttribute('href') === `#${current}`);
+        menu.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.classList.toggle('active-link', link.getAttribute('href') === '#' + current);
         });
     }
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
 
-    /* ─── HERO PARTICLES ─────────────────────────── */
-    const particleContainer = document.getElementById('hero-particles');
-    if (particleContainer) {
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', event => {
+            const href = link.getAttribute('href');
+            const target = href.length > 1 ? document.getElementById(href.slice(1)) : null;
+            if (!target) return;
+            event.preventDefault();
+            const top = target.getBoundingClientRect().top + window.scrollY - nav.offsetHeight - 20;
+            window.scrollTo({ top, behavior: reducedMotion ? 'instant' : 'smooth' });
+        });
+    });
+
+    const particles = document.getElementById('hero-particles');
+    if (particles && !reducedMotion) {
         for (let i = 0; i < 28; i++) {
-            const p = document.createElement('div');
-            p.className = 'particle';
+            const particle = document.createElement('div');
+            particle.className = 'particle';
             const size = Math.random() * 3 + 1;
-            p.style.cssText = `
-                width: ${size}px;
-                height: ${size}px;
-                left: ${Math.random() * 100}%;
-                animation-duration: ${Math.random() * 12 + 8}s;
-                animation-delay: ${Math.random() * 10}s;
-                opacity: ${Math.random() * 0.5 + 0.1};
-            `;
-            particleContainer.appendChild(p);
+            particle.style.cssText = 'width:' + size + 'px;height:' + size + 'px;left:' +
+                Math.random() * 100 + '%;animation-duration:' + (Math.random() * 12 + 8) +
+                's;animation-delay:' + Math.random() * 10 + 's;opacity:' + (Math.random() * 0.5 + 0.1);
+            particles.appendChild(particle);
         }
     }
 
-    /* ─── REVEAL ON SCROLL (INTERSECTION OBSERVER) ─ */
-    const revealEls = document.querySelectorAll('.reveal, .stat-card, .book-card, .film-card, .photo-item, .edit-feature');
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, i) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
+    const revealElements = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && !reducedMotion) {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                }, i * 80);
-                revealObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-
-    revealEls.forEach(el => {
-        el.classList.add('reveal');
-        revealObserver.observe(el);
-    });
-
-    /* ─── ANIMATED STATS COUNTER ─────────────────── */
-    const statNums = document.querySelectorAll('.stat-num');
-    const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateCounter(entry.target);
-                statsObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-    statNums.forEach(el => statsObserver.observe(el));
-
-    function animateCounter(el) {
-        const target = parseInt(el.dataset.target, 10);
-        const duration = 1800;
-        const step = target / (duration / 16);
-        let current = 0;
-        const timer = setInterval(() => {
-            current += step;
-            if (current >= target) { current = target; clearInterval(timer); }
-            el.textContent = Math.floor(current);
-        }, 16);
-    }
-
-    /* ─── PHOTOGRAPHY FILTER ─────────────────────── */
-    const filterBtns = document.querySelectorAll('.photo-filter');
-    const photoItems = document.querySelectorAll('.photo-item');
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const filter = btn.dataset.filter;
-            photoItems.forEach(item => {
-                const match = filter === 'all' || item.dataset.category === filter;
-                item.style.opacity = '0';
-                item.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    item.style.display = match ? 'block' : 'none';
-                    if (match) {
-                        requestAnimationFrame(() => {
-                            item.style.opacity = '1';
-                            item.style.transform = 'scale(1)';
-                        });
-                    }
-                }, 200);
+                    observer.unobserve(entry.target);
+                }
             });
-        });
-    });
+        }, { threshold: 0.08 });
+        revealElements.forEach(el => observer.observe(el));
+    } else {
+        revealElements.forEach(el => el.classList.add('visible'));
+    }
 
-    /* ─── CONTACT FORM ───────────────────────────── */
-    const form       = document.getElementById('contact-form');
-    const submitBtn  = document.getElementById('submit-btn');
-    const successMsg = document.getElementById('form-success');
-
+    // Keep the inquiry preview inactive until a working inbox is confirmed.
+    // After verification, set this address to enable the email-draft workflow.
+    const inquiryEmail = '';
+    const form = document.getElementById('contact-form');
     if (form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name    = document.getElementById('cf-name').value.trim();
-            const email   = document.getElementById('cf-email').value.trim();
-            const message = document.getElementById('cf-message').value.trim();
-
-            if (!name || !email || !message) {
-                shakeForm(form);
-                return;
-            }
-            if (!isValidEmail(email)) {
-                shakeForm(document.getElementById('cf-email').parentElement);
-                return;
-            }
-
-            submitBtn.innerHTML = '<span>Sending...</span>';
-            submitBtn.disabled  = true;
-
-            setTimeout(() => {
-                form.reset();
-                submitBtn.innerHTML = '<span>Send Message</span><span class="btn-arrow">→</span>';
-                submitBtn.disabled  = false;
-                successMsg.classList.add('show');
-                setTimeout(() => successMsg.classList.remove('show'), 5000);
-            }, 1400);
-        });
-    }
-
-    function isValidEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-    function shakeForm(el) {
-        el.style.animation = 'none';
-        el.offsetHeight; // reflow
-        el.style.animation = 'shake 0.4s ease';
-        setTimeout(() => el.style.animation = '', 400);
-    }
-
-    /* ─── SMOOTH SCROLL FOR ANCHOR LINKS ─────────── */
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                e.preventDefault();
-                const offset = nav.offsetHeight + 20;
-                const top    = target.getBoundingClientRect().top + window.scrollY - offset;
-                window.scrollTo({ top, behavior: 'smooth' });
-            }
-        });
-    });
-
-    /* ─── LIGHTBOX ───────────────────────────────── */
-    let lightboxImages = [];
-    let currentLbIndex = 0;
-
-    function buildLightboxGallery() {
-        lightboxImages = [...document.querySelectorAll('.photo-item img')].map(img => ({
-            src: img.src,
-            alt: img.alt
-        }));
-    }
-    buildLightboxGallery();
-
-    document.getElementById('lb-prev')?.addEventListener('click', (e) => {
-        e.stopPropagation();
-        currentLbIndex = (currentLbIndex - 1 + lightboxImages.length) % lightboxImages.length;
-        setLightboxImage(currentLbIndex);
-    });
-    document.getElementById('lb-next')?.addEventListener('click', (e) => {
-        e.stopPropagation();
-        currentLbIndex = (currentLbIndex + 1) % lightboxImages.length;
-        setLightboxImage(currentLbIndex);
-    });
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        const lb = document.getElementById('lightbox');
-        if (!lb.classList.contains('active')) return;
-        if (e.key === 'Escape')      closeLightbox();
-        if (e.key === 'ArrowLeft')   { currentLbIndex = (currentLbIndex - 1 + lightboxImages.length) % lightboxImages.length; setLightboxImage(currentLbIndex); }
-        if (e.key === 'ArrowRight')  { currentLbIndex = (currentLbIndex + 1) % lightboxImages.length; setLightboxImage(currentLbIndex); }
-    });
-
-    // Close lightbox on backdrop click
-    document.getElementById('lightbox')?.addEventListener('click', (e) => {
-        if (e.target === document.getElementById('lightbox')) closeLightbox();
-    });
-
-    function setLightboxImage(index) {
-        const lbImg = document.getElementById('lightbox-img');
-        const lbCap = document.getElementById('lightbox-caption');
-        lbImg.style.opacity = '0';
-        setTimeout(() => {
-            lbImg.src = lightboxImages[index].src;
-            lbImg.alt = lightboxImages[index].alt;
-            if (lbCap) lbCap.textContent = lightboxImages[index].alt;
-            lbImg.style.opacity = '1';
-        }, 180);
-    }
-
-    // Inject smooth transition on lightbox image
-    const lbImg = document.getElementById('lightbox-img');
-    if (lbImg) lbImg.style.transition = 'opacity 0.18s ease';
-
-});
-
-/* ─── LIGHTBOX GLOBAL FUNCTIONS ──────────────────── */
-function openLightbox(element) {
-    const lb = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lightbox-img');
-    const lbCap = document.getElementById('lightbox-caption');
-    const clickedImg = element.querySelector('img');
-
-    lbImg.src = clickedImg.src;
-    lbImg.alt = clickedImg.alt;
-    if (lbCap) lbCap.textContent = clickedImg.alt;
-
-    // Find current index
-    const allImgs = [...document.querySelectorAll('.photo-item img')];
-    const idx = allImgs.findIndex(img => img.src === clickedImg.src);
-    if (idx !== -1) { /* update currentLbIndex via closure — we use a data attr */ }
-    lb.setAttribute('data-index', idx >= 0 ? idx : 0);
-
-    lb.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('active');
-    document.body.style.overflow = '';
-}
-
-/* ─── PDF READER GLOBAL FUNCTIONS ───────────────── */
-function openBook(url) {
-    const reader = document.getElementById('pdf-reader');
-    const frame  = document.getElementById('pdf-frame');
-    frame.src    = url;
-    reader.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeBook() {
-    const reader = document.getElementById('pdf-reader');
-    const frame  = document.getElementById('pdf-frame');
-    reader.classList.remove('active');
-    frame.src = '';
-    document.body.style.overflow = '';
-}
-
-/* ─── CSS SHAKE ANIMATION (injected) ─────────────── */
-(function injectKeyframes() {
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes shake {
-            0%,100% { transform: translateX(0); }
-            20%      { transform: translateX(-8px); }
-            40%      { transform: translateX(8px); }
-            60%      { transform: translateX(-5px); }
-            80%      { transform: translateX(5px); }
+        const note = document.querySelector('.contact-note');
+        const submitButton = form.querySelector('button[type="submit"]');
+        if (inquiryEmail) {
+            form.querySelectorAll('input, select, textarea, button').forEach(control => {
+                control.disabled = false;
+            });
+            submitButton.textContent = 'Open Email Draft →';
+            note.textContent = 'Submitting this form opens a prepared message in your email app. Send it there to complete your inquiry.';
         }
-        .active-link { color: var(--gold) !important; }
-        .active-link::after { left: 0.85rem !important; right: 0.85rem !important; }
-    `;
-    document.head.appendChild(style);
-})();
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+            if (!inquiryEmail || !form.reportValidity()) return;
+            const name = form.elements.name.value.trim();
+            const email = form.elements.email.value.trim();
+            const service = form.elements.service;
+            const serviceName = service.options[service.selectedIndex].text;
+            const message = form.elements.message.value.trim();
+            if (!name || !email || !message) return;
+            const subject = 'LightPix project inquiry: ' + serviceName;
+            const body = 'Name: ' + name + '\nEmail: ' + email + '\nProject type: ' +
+                serviceName + '\n\n' + message;
+            window.location.href = 'mailto:' + inquiryEmail + '?subject=' +
+                encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        });
+    }
+});
